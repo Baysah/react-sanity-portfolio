@@ -21,7 +21,8 @@ export default function Project() {
                 alt
             }
         }`).then((data) => setProjectData(data)).catch(console.error);
-    }, [])
+    }, []);
+    
     return (
         <main className="bg-blue-100 min-h-screen p-12">
             <section className="container mx-auto">
@@ -33,7 +34,7 @@ export default function Project() {
                 </h2>
                 <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {projectData && projectData.map((project, index) => (
-                    <article className="relative rounded-lg shadow-xl bg-white ">
+                    <article className="relative rounded-lg shadow-xl bg-white flex flex-col h-full">
                         <h3 className="text-gray-800 text-3xl font-bold mb-2 hover:text-red-700 px-5">
                             <a href={project.link} alt={project.title} target="_blank" rel="noopener noreferrer">{project.title}</a>
                         </h3>
@@ -41,7 +42,7 @@ export default function Project() {
                             src={project.mainImage.asset.url}
                             alt={project.mainImage.alt}
                         />
-                        <div className="text-gray-500 text-xs space-x-4 p-5">
+                        <div className="text-gray-500 text-xs space-x-4 mb-24 h-full">
                             <span>
                                 <strong className="font-bold">
                                     Finished on
@@ -60,9 +61,12 @@ export default function Project() {
                             View The Project{" "}
                                 <span role="img" aria-label="right pointer"></span>
                             </a>
-                            
                         </div>
-                        
+                        <ul className="flex  bg-blue-400 py-5 w-full ">
+                            {project.tags.map(function(tag){
+                                return <li className="flex item-center mx-2 bg-blue-800 text-white px-2 rounded-lg py-2 text-xs ">{tag}</li>
+                            })}
+                        </ul>
                     </article>
                     ))}
                 </section>
